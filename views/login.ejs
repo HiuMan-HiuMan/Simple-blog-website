@@ -1,0 +1,15 @@
+<%- include("partial/header") %>
+<body class="login-page">
+    <div class="login-container">
+        <h1 class="title-screen">Welcome to MyDreams</h1>
+        <p>Explore the experiences that you and other people have seen</p>
+            <form class="login-form login-method" action="/login" method="POST">
+                <input type="text" name="username" placeholder="Enter your username">
+                <input type="password" name="password" placeholder="Enter your password">
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+        <button type="button" class="login-method google-btn" href="/auth/google">Google login</button>
+        <button type="button" class="login-method register-btn" href="/register">Register</button>
+    </div>
+
+    <%- include("partial/footer") %>
