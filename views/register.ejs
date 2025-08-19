@@ -1,0 +1,15 @@
+<%- include("partial/header") %>
+
+<body class="login-page">
+    <form class="login-container" action="/register" method="POST">
+        <label class="login-label" for="email">Email Address:</label>
+        <input class="login-method" type="email" name="email" placeholder="Enter your email">
+        <label for="username">Enter your username:</label>
+        <input class="login-method" type="text" name="username" placeholder="Enter your username">
+        <label for="password">Enter your password:</label>
+        <input class="login-method" type="password" name="password" placeholder="Enter yout password">
+        <button class="login-method login-btn" type="submit">Create new account</button>
+    </form>
+
+ <%- include("partial/footer") %>
+

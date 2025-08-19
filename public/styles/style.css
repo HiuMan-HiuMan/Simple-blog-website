@@ -51,8 +51,8 @@ body {
     width: 50%;
     box-sizing: border-box;
     padding: 20px;
-    text-align: center;
-    margin: 5px;
+    margin: 0.75;
+    margin-bottom: 1rem;
     border-radius: 10px;
     border: none;
     font-family: "Delius", cursive;
@@ -81,9 +81,13 @@ input:focus {
     font-size: 1.25rem;
 }
 
-.login-btn{
+label {
+    color: white;
+}
+
+.login-btn {
     font-size: 1.25rem;
-    margin-top: 15px;
+    margin-top: 20px;
     background-color: rgb(114, 81, 182);
     color: white;
 
@@ -92,6 +96,14 @@ input:focus {
 .register-btn {
     background-color: rgb(114, 81, 182);
     color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.google-btn {
+    color:rgb(97, 69, 154);
+    text-align: center;
+    text-decoration: none;
 }
 
 button:hover, .logo:hover {
@@ -224,8 +236,6 @@ button:hover, .logo:hover {
 .post-icon {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
 }
 
 .edit-post-container {
