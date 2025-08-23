@@ -286,7 +286,7 @@ button:hover, .logo:hover, .register-btn:hover {
     }
 
     .popup {
-        display: none
+        display: none;
     }
 
 }

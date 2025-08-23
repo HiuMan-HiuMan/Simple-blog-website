@@ -129,7 +129,7 @@ app.get("/search", async (req, res) => {
   }
 
   try {
-    const postCatalogue = await db.query("SELECT * FROM posts AS p JOIN users AS u ON p.userid = u.id WHERE u.username LIKE $1",
+    const postCatalogue = await db.query("SELECT * FROM posts AS p JOIN users AS u ON p.userid = u.id WHERE u.username LIKE $1 ORDER BY date DESC",
         [req.query.searchUser + '%'] 
     )
 
@@ -236,6 +236,40 @@ app.post("/register", async (req, res) => {
         console.log(err);
         res.redirect("/register");
     }
+});
+
+app.post("/logout", (req, res) => {
+    req.logout((err) => {
+        if(err) {return next(err)}
+        return res.status(200);
+    });
+})
+
+app.delete("/post/:id", async (req, res) => {
+    if(!req.isAuthenticated()) {
+        return res.status(401).render("login.ejs");
+    }
+    try {
+        const deletePost = await db.query("DELETE FROM posts WHERE postid = $1 AND userid = $2 RETURNING *", 
+            [req.params.id, req.user.id]
+        );
+
+        console.log(deletePost);
+
+        if(deletePost.rows.length === 0) {
+            console.log("Item does not exist or user is not authorised")
+            return res.status(400);
+        }
+
+        console.log("post found");
+        return res.status(200).json({why: "j"});
+
+    } catch(err) {
+        console.log("Error while deleting");
+        console.log(err);
+        return res.status(500);
+    }
+    
 });
 
 passport.use("local", new Strategy(async function verify(username, password, cb) {

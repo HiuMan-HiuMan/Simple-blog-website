@@ -7,44 +7,49 @@
         });
         document.querySelector("div.popup-open").classList.toggle("inactive");
     }
+    if(document.querySelectorAll(".post-container")) {
+        document.querySelectorAll(".delete").forEach((button) => {
+            button.addEventListener("click", async function() {
+    
+                const postid = this.parentElement.parentElement.id;
+                const result = await fetch(`/post/${postid}`, {
+                    method: "DELETE",
+                })
+                .then(response => {
+                    console.log(response)
+                    if(!response.ok) {
+                        throw new Error("User not authorised or item not found");
+                    }
+                    document.getElementById(`${postid}`).remove();
+                })
+                .catch(error => {console.log(error)});
 
-   document.querySelector(".popup-open").addEventListener("click", togglePanel);
+            })
+        });
+    }
 
-   document.querySelector(".popup-close").addEventListener("click", togglePanel);
-        
+    if(document.querySelector(".info-card")) {
+        document.querySelector(".popup-open").addEventListener("click", togglePanel);
+        document.querySelector(".popup-close").addEventListener("click", togglePanel);
+    }
+
+    if(document.querySelector("#logout")) {
+        document.querySelector("#logout").addEventListener("click", async function() {
+            await fetch("/logout", 
+            {method: "POST",})
+            .then(response => {
+                if(!response.ok) {
+                    throw new Error("Logout process failed");
+                }
+                window.location.href = "/login";
+                
+            })
+            .catch(error => console.log("Error while logging out"));
+        })
+    }
+
 </script>
 
 </body>
 </html>
 
-<!-- <div class="post-container">
-    <a class="post-content" href="/post/id">
-        
-        <h1 class="post-title">Title</h1>
-        <h2 class="post-user">Posted by: username</h2>
-        <p class="post-date">The post date</p>
-        <p class="post-blog">the content in whihc the blog swould be created from but jesus criset i am going to need to copy a really long senetence hfuriuiehgegjg
-            jghidghirgirislg
-            hfsghieijgskhgrit
-            flhswht is that tloke because who would have thought 
-            kkfkfkfkfshfirhgshgs;g
-            sghrihwhat 
-            wy is this so header
-        </p>
-    </a>
-    <div class="post-icon">
-        <a href="/delete">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
-                <image src="public/images/delete_icon/delete.png" alt="Delete icon"></image>
-            </svg>
-        </a>
-        <a href="/edit">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                <path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/>
-                <image src="public/images/edit_icon/edit.png" alt="Edit icon"></image>
-            </svg>
-        </a>
-        
-    </div>
-</div> -->
